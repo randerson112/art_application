@@ -1,2 +1,2 @@
 # art_application
-Art making tool for my portfolio
+This is my Art-making tool for my job portfolio. In this project I would like to create an intuitive art application where users can create paint, and pixel art images with ease. I want to create an easy to use interface that users can easily navigate and create their pieces very efficiently. Users will be able to save and load files to continue working on them. As of now I have a very basic painting tool implemented but there is still a lot of work to do.
