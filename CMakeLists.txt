@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(artProgram)
+project(artApp)
 
 set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 
-add_executable(artProgram src/main.cpp src/colorButton.cpp)
+add_executable(artApp src/main.cpp src/colorButton.cpp src/brush.cpp)
 
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-target_link_libraries(artProgram sfml-graphics sfml-window sfml-system)
+target_link_libraries(artApp sfml-graphics sfml-window sfml-system)
