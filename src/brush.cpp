@@ -4,7 +4,7 @@
 Brush::Brush()
 {
     size = 10;
-    color = sf::Color::White;
+    color = sf::Color::Black;
 }
 
 void Brush::setSize(float newSize)
@@ -17,15 +17,12 @@ void Brush::setColor(sf::Color newColor)
     color = newColor;
 }
 
-void Brush::handleActions(sf::RenderWindow& window, std::vector<sf::CircleShape>& strokes)
+void Brush::use(sf::RenderWindow& window, Canvas& canvas, sf::Vector2f mousePosition)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-    {
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-        sf::CircleShape stroke(size);
-        stroke.setFillColor(color);
-        stroke.setOrigin(size, size);
-        stroke.setPosition((sf::Vector2f) mousePosition);
-        strokes.push_back(stroke);
-    }
+    sf::CircleShape stroke(size);
+    stroke.setFillColor(color);
+    stroke.setOrigin(size, size);
+    stroke.setPosition((sf::Vector2f) mousePosition);
+    canvas.getRenderTexture().draw(stroke);
+    canvas.getRenderTexture().display();
 }

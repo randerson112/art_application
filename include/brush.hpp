@@ -14,9 +14,9 @@ public:
     Brush();
 
     void setSize(float newSize);
-    void setColor(sf::Color newColor);
+    void setColor(sf::Color newColor) override;
 
-    void handleActions(sf::RenderWindow& window, std::vector<sf::CircleShape>& strokes) override;
+    void use(sf::RenderWindow& window, Canvas& canvas, sf::Vector2f mousePosition) override;
 };
 
 #endif

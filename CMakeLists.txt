@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 
-add_executable(artApp src/main.cpp src/colorButton.cpp src/brush.cpp)
+add_executable(artApp src/main.cpp src/colorButton.cpp src/brush.cpp src/canvas.cpp)
 
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
