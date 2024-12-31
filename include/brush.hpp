@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "tool.hpp"
 
+//Brush class that handles brush functionality like painting to the canvas
 class Brush : public Tool
 {
 private:

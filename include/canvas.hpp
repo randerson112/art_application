@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
+//Canvas class that acts as a container for the user's artwork
 class Canvas : public sf::Drawable
 {
 private:

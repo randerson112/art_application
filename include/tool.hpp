@@ -5,6 +5,7 @@
 #include <vector>
 #include "canvas.hpp"
 
+//Base tool class that all other art tools will inherit from
 class Tool
 {
 public:
