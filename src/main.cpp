@@ -64,38 +64,23 @@ int main()
 
             sf::Vector2f canvasMousePosition = mousePosition - canvas.getPosition();
 
-            if (mouseX >= 0 && mouseX <= 80 && mouseY >= 0 && mouseY <= 80)
+            for (ColorButton& button : buttons)
             {
-                currentTool->setColor(sf::Color::White);
+                if (button.circle.getGlobalBounds().contains(mousePosition))
+                {
+                    currentTool->setColor(button.color);
+                }
             }
-            else if (mouseX >= 0 && mouseX <= 80 && mouseY >= 100 && mouseY <= 180)
-            {
-                currentTool->setColor(sf::Color::Red);
-            }
-            else if (mouseX >= 0 && mouseX <= 80 && mouseY >= 200 && mouseY <= 280)
-            {
-                currentTool->setColor(sf::Color::Blue);
-            }
-            else if (mouseX >= 0 && mouseX <= 80 && mouseY >= 300 && mouseY <= 380)
-            {
-                currentTool->setColor(sf::Color::Yellow);
-            }
-            else if (mouseX >= 0 && mouseX <= 80 && mouseY >= 400 && mouseY <= 480)
-            {
-                currentTool->setColor(sf::Color::Green);
-            }
-            else if (mouseX >= 0 && mouseX <= 80 && mouseY >= 500 && mouseY <= 580)
-            {
-                currentTool->setColor(sf::Color::Magenta);
-            }
-            else if (mouseX >= 0 && mouseX <= 80 && mouseY >= 720 && mouseY <= 800)
+
+            if (clear1.getGlobalBounds().contains(mousePosition))
             {
                 canvas.clear();
             }
-            else if (canvasMousePosition.x > 0 &&
-                    canvasMousePosition.x < canvas.getRenderTexture().getSize().x &&
-                    canvasMousePosition.y > 0 &&
-                    canvasMousePosition.y < canvas.getRenderTexture().getSize().y)
+
+            if (canvasMousePosition.x > 0 &&
+                canvasMousePosition.x < canvas.getRenderTexture().getSize().x &&
+                canvasMousePosition.y > 0 &&
+                canvasMousePosition.y < canvas.getRenderTexture().getSize().y)
             {
                 currentTool->use(window, canvas, canvasMousePosition);
             }
