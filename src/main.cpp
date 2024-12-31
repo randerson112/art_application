@@ -46,6 +46,14 @@ int main()
             {
                 window.close();
             }
+
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::S)
+                {
+                    canvas.saveToFile("painting.png");
+                }
+            }
         }
 
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
