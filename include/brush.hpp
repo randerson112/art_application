@@ -10,6 +10,8 @@ class Brush : public Tool
 private:
     float size;
     sf::Color color;
+    sf::Vector2f lastMouseposition;
+    bool firstStroke;
 
 public:
     Brush();
@@ -18,6 +20,7 @@ public:
     void setColor(sf::Color newColor) override;
 
     void use(sf::RenderWindow& window, Canvas& canvas, sf::Vector2f mousePosition) override;
+    void reset();
 };
 
 #endif

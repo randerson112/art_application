@@ -6,6 +6,7 @@ Brush::Brush()
 {
     size = 10;
     color = sf::Color::Black;
+    firstStroke = true;
 }
 
 //Set the size of the brush when resizing
@@ -23,10 +24,31 @@ void Brush::setColor(sf::Color newColor)
 //Draws brushstrokes to the canvas when the brush is used
 void Brush::use(sf::RenderWindow& window, Canvas& canvas, sf::Vector2f mousePosition)
 {
-    sf::CircleShape stroke(size);
-    stroke.setFillColor(color);
-    stroke.setOrigin(size, size);
-    stroke.setPosition((sf::Vector2f) mousePosition);
-    canvas.getRenderTexture().draw(stroke);
+    if (firstStroke)
+    {
+        lastMouseposition = mousePosition;
+        firstStroke = false;
+    }
+
+    sf::Vector2f direction = mousePosition - lastMouseposition;
+    float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    sf::Vector2f step = direction / distance;
+
+    for (float i = 0; i < distance; i += size/2)
+    {
+        sf::CircleShape stroke(size);
+        stroke.setFillColor(color);
+        stroke.setOrigin(size, size);
+        stroke.setPosition(lastMouseposition + step * i);
+        canvas.getRenderTexture().draw(stroke);
+    }
+
+    lastMouseposition = mousePosition;
+
     canvas.getRenderTexture().display();
+}
+
+void Brush::reset()
+{
+    firstStroke = true;
 }

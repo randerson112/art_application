@@ -90,6 +90,14 @@ int main()
                     }
                 }
             }
+
+            if (event.type == sf::Event::MouseButtonReleased)
+            {
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    dynamic_cast<Brush*>(currentTool)->reset();
+                }
+            }
         }
 
         //While left mouse button is pressed
