@@ -3,18 +3,15 @@
 #include <SFML/Graphics.hpp>
 
 //Constructor to create the texture of the canvas and set the backgound color and position
-Canvas::Canvas(sf::Vector2u size, sf::Color backgroundColor) : backgroundColor(backgroundColor)
+Canvas::Canvas(sf::Vector2u size, sf::Color backgroundColor) : 
+backgroundColor(backgroundColor), renderTexture({size.x, size.y}), canvasSprite(renderTexture.getTexture())
 {
-    if (!renderTexture.create(size.x, size.y))
-    {
-        throw std::runtime_error("Failed to create render texture.");
-    }
-
     renderTexture.clear(backgroundColor);
     renderTexture.display();
 
-    canvasSprite.setTexture(renderTexture.getTexture());
-    canvasSprite.setPosition(settings::winWidth/2 - size.x/2 + 50, settings::winHeight/2 - size.y/2);
+    canvasSprite.setPosition(
+        {static_cast<float>(settings::winWidth) / 2 - size.x / 2 + 50,
+        static_cast<float>(settings::winHeight) / 2 - size.y / 2});
 }
 
 //Getter for the private render texture member

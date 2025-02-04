@@ -32,13 +32,16 @@ void Brush::use(sf::RenderWindow& window, Canvas& canvas, sf::Vector2f mousePosi
 
     sf::Vector2f direction = mousePosition - lastMouseposition;
     float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+    if (distance == 0) return; //Avoid division by 0 error
+
     sf::Vector2f step = direction / distance;
 
     for (float i = 0; i < distance; i += size/2)
     {
         sf::CircleShape stroke(size);
         stroke.setFillColor(color);
-        stroke.setOrigin(size, size);
+        stroke.setOrigin({size, size});
         stroke.setPosition(lastMouseposition + step * i);
         canvas.getRenderTexture().draw(stroke);
     }

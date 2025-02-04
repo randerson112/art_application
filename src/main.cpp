@@ -9,7 +9,7 @@
 int main()
 {
     //Creation of Window, Canvas, and tools
-    sf::RenderWindow window(sf::VideoMode(settings::winWidth, settings::winHeight), "Art Application");
+    sf::RenderWindow window(sf::VideoMode({settings::winWidth, settings::winHeight}), "Art Application");
 
     Canvas canvas(settings::canvasSize, sf::Color::White);
 
@@ -30,11 +30,11 @@ int main()
 
     //Creation of clear button and pallete textures
     sf::CircleShape clear1(40);
-    clear1.setPosition(10, 710);
+    clear1.setPosition({10, 710});
     clear1.setFillColor(sf::Color::Red);
 
     sf::CircleShape clear2(30);
-    clear2.setPosition(20, 720);
+    clear2.setPosition({20, 720});
     clear2.setFillColor(sf::Color::Black);
 
     sf::RectangleShape pallete;
@@ -49,30 +49,28 @@ int main()
         sf::Vector2f canvasMousePosition = mousePosition - canvas.getPosition();
 
         //Event loop
-        sf::Event event;
-
-        while (window.pollEvent(event))
+        while (const std::optional event = window.pollEvent())
         {
             //Window close event
-            if (event.type == sf::Event::Closed)
+            if (event->is<sf::Event::Closed>())
             {
                 window.close();
             }
 
             //Key pressed events
-            if (event.type == sf::Event::KeyPressed)
+            if (const auto* KeyPressed = event->getIf<sf::Event::KeyPressed>())
             {
-                if (event.key.code == sf::Keyboard::S)
+                if (KeyPressed->scancode == sf::Keyboard::Scancode::S)
                 {
                     canvas.saveToFile("painting.png");
                 }
             }
 
             //Mouse button pressed events
-            if (event.type == sf::Event::MouseButtonPressed)
+            if (const auto* MouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>())
             {
                 //Left mouse button clicked event
-                if (event.mouseButton.button == sf::Mouse::Left)
+                if (MouseButtonPressed->button == sf::Mouse::Button::Left)
                 {
                     //Checks to see if a color button was clicked
                     for (ColorButton& button : buttons)
@@ -91,9 +89,9 @@ int main()
                 }
             }
 
-            if (event.type == sf::Event::MouseButtonReleased)
+            if (const auto* MouseButtonReleased = event->getIf<sf::Event::MouseButtonReleased>())
             {
-                if (event.mouseButton.button == sf::Mouse::Left)
+                if (MouseButtonReleased->button == sf::Mouse::Button::Left)
                 {
                     dynamic_cast<Brush*>(currentTool)->reset();
                 }
