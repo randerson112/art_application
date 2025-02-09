@@ -109,6 +109,8 @@ int main()
             {
                 currentTool->use(window, canvas, canvasMousePosition);
             }
+            //Reset brush stroke if mouse goes off canvas
+            else dynamic_cast<Brush*>(currentTool)->reset();
         }
 
         //Draw the canvas, pallete, color buttons, and clear button to the screen
